@@ -1,0 +1,26 @@
+{
+  "name": "typeos",
+  "version": "1.0.0",
+  "description": "A minimalist desktop UI",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InstantCodee/TypeOS.git"
+  },
+  "keywords": [
+    "desktop",
+    "ui",
+    "showcase",
+    "design",
+    "minimalism"
+  ],
+  "author": "InstantCodee",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/InstantCodee/TypeOS/issues"
+  },
+  "homepage": "https://github.com/InstantCodee/TypeOS#readme"
+}
