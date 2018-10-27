@@ -21,6 +21,26 @@ $light-bg:       #FFFFFF
 $light-inactive: #A8A8A8
 $light-active:   #404040
 
+// Controls
+.type-highlightable
+    transition: 0.2s
+    cursor: pointer
+    position: relative
+    &.active:after
+        width: 90%
+    &:hover:after
+        width: 90%
+    &:after
+        content: ''
+        position: absolute
+        height: 1px
+        bottom: -4px
+        margin: 0 auto
+        left: 0
+        right: 0
+        width: 0%
+        transition: 0.2s
+
 // Colors
 .dark-theme
     & .type-background
@@ -31,27 +51,9 @@ $light-active:   #404040
         color: $dark-active
     & .type-highlightable
         color: $dark-inactive
-        transition: 0.2s
-        cursor: pointer
-        position: relative
-        &.active
+        &.active, &:hover
             color: $dark-active
-            &:after
-                width: 90%
-        &:hover
-            color: $dark-active
-            &:after
-                width: 90%
         &:after
-            content: ''
-            position: absolute
-            height: 1px
-            bottom: -4px
-            margin: 0 auto
-            left: 0
-            right: 0
-            width: 0%
-            transition: 0.2s
             background: $dark-active
 
 .light-theme
@@ -61,3 +63,9 @@ $light-active:   #404040
         color: $light-inactive
     & .type-active
         color: $light-active
+    & .type-highlightable
+        color: $light-inactive
+        &.active, &:hover
+            color: $light-active
+        &:after
+            background: $light-active
