@@ -1,25 +1,45 @@
+<!--
+This file is part of TypeOS.
+
+TypeOS is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+TypeOS is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with TypeOS.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>TypeOS - Showcase</title>
+    <meta charset="utf-8" />
+    <title>TypeOS</title>
 
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <link rel="stylesheet" type="text/css" href="../css/header.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/panel.css" />
+    <link rel="stylesheet" type="text/css" href="../css/controls.css" />
   </head>
-  <body>
+  <body class="dark-theme">
     <!-- Basic website containers -->
-    <div class="header">
+    <header class="panel type-background">
         <ul>
-            <li id="apps">Apps</li>
-            <li>Chat</li>
-            <li>Webbrowser</li>
-            <li>Image Editor</li>
-            <li id="clock">13:10</li>
+            <li class="apps type-highlightable active">Apps</li>
+            <ul class="tasklist">
+              <li><a class="type-highlightable">Chat</a></li>
+              <li class="type-highlightable">Webbrowser</li>
+              <li class="type-highlightable">Image Editor</li>
+            </ul>
+            <li class="clock type-highlightable">13:10</li>
         </ul>
-    </div>
-    <div class="content">
-        <h1>This should be the content</h1>
+      </header>
+    <div class="desktop type-background">
+        <h1>Content</h1>
     </div>
   </body>
 </html>

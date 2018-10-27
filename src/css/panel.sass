@@ -1,0 +1,46 @@
+/*  This file is part of TypeOS.
+
+    TypeOS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    TypeOS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with TypeOS.  If not, see <http://www.gnu.org/licenses/>. */
+
+.panel
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    padding: 12px
+    & li
+        text-align: center
+        display: inline-block
+    & ul
+        position: relative
+        height: 18px
+        & li.apps
+            position: absolute
+            top: 0
+            left: 0
+            bottom: 0
+        & li.clock
+            position: absolute
+            top: 0
+            right: 0
+            bottom: 0
+        & ul.tasklist
+            position: absolute
+            top: 0
+            left: 50px
+            right: 50px
+            bottom: 0
+            text-align: center
+            & li
+                margin: 0 24px

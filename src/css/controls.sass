@@ -1,0 +1,63 @@
+/*  This file is part of TypeOS.
+
+    TypeOS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    TypeOS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with TypeOS.  If not, see <http://www.gnu.org/licenses/>. */
+
+$dark-bg:       #404040
+$dark-inactive: #7B7B7B
+$dark-active:   #FFFFFF
+
+$light-bg:       #FFFFFF
+$light-inactive: #A8A8A8
+$light-active:   #404040
+
+// Colors
+.dark-theme
+    & .type-background
+        background: $dark-bg
+    & .type-inactive
+        color: $dark-inactive
+    & .type-active
+        color: $dark-active
+    & .type-highlightable
+        color: $dark-inactive
+        transition: 0.2s
+        cursor: pointer
+        position: relative
+        &.active
+            color: $dark-active
+            &:after
+                width: 90%
+        &:hover
+            color: $dark-active
+            &:after
+                width: 90%
+        &:after
+            content: ''
+            position: absolute
+            height: 1px
+            bottom: -4px
+            margin: 0 auto
+            left: 0
+            right: 0
+            width: 0%
+            transition: 0.2s
+            background: $dark-active
+
+.light-theme
+    & .type-background
+        background: $light-bg
+    & .type-inactive
+        color: $light-inactive
+    & .type-active
+        color: $light-active

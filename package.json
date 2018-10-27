@@ -5,7 +5,8 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc src/app.ts && electron src/app.js"
+    "start": "tsc src/app.ts && electron src/app.js",
+    "watch-css": "node-sass --watch src/css -o src/css"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,8 @@
   },
   "homepage": "https://github.com/InstantCodee/TypeOS#readme",
   "devDependencies": {
-    "electron": "^4.0.0-beta.5"
+    "electron": "^4.0.0-beta.5",
+    "node-sass": "^4.9.4",
+    "typescript": "^3.1.3"
   }
 }
