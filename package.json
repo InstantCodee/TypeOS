@@ -5,8 +5,7 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "sh start.sh",
-    "build": "cd src/ui && ng build --output-path ../../js/"
+    "start": "tsc src/app.ts && electron src/app.js"
   },
   "repository": {
     "type": "git",

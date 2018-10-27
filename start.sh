@@ -1,5 +1,5 @@
 # Compile TypeScript to JavaScrupt
-tsc src/app.ts --outDir out/
+tsc src/app.ts
 
 # Start electron application
-electron out/app.js
+electron src/app.js

@@ -4,5 +4,5 @@ let win: BrowserWindow = null;
 app.on('ready', () => {
     win = new BrowserWindow()
     win.setFullScreen(true)
-    win.loadURL(`file://${__dirname}/../src/html/index.html`)
+    win.loadURL(`file://${__dirname}/html/index.html`)
 })
