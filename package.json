@@ -1,10 +1,11 @@
 {
   "name": "typeos",
   "version": "1.0.0",
-  "description": "A minimalist desktop UI",
+  "description": "Design showcase for a minimalist desktop UI",
   "main": "app.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc src/app.ts --outDir js/ && electron js/app.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/InstantCodee/TypeOS/issues"
   },
-  "homepage": "https://github.com/InstantCodee/TypeOS#readme"
+  "homepage": "https://github.com/InstantCodee/TypeOS#readme",
+  "devDependencies": {
+    "electron": "^4.0.0-beta.5"
+  }
 }

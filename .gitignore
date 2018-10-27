@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+# JavaScript files, because we are using TypeScript
+*.js
