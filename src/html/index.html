@@ -21,9 +21,14 @@ along with TypeOS.  If not, see <http://www.gnu.org/licenses/>.
     <meta charset="utf-8" />
     <title>TypeOS</title>
 
+    <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/panel.css" />
     <link rel="stylesheet" type="text/css" href="../css/controls.css" />
+
+    <!-- JavaScripts -->
+    <script>var exports = {};</script>
+    <script src="../js/controller.js"></script>
   </head>
   <body class="dark-theme">
     <!-- Basic website containers -->
@@ -31,15 +36,15 @@ along with TypeOS.  If not, see <http://www.gnu.org/licenses/>.
         <ul>
             <li class="apps type-highlightable active">Apps</li>
             <ul class="tasklist">
-              <li><a class="type-highlightable">Chat</a></li>
+              <li onclick="get_exception()" class="type-highlightable">Chat</li>
               <li class="type-highlightable">Webbrowser</li>
               <li class="type-highlightable">Image Editor</li>
             </ul>
             <li class="clock type-highlightable">13:10</li>
         </ul>
       </header>
-    <div class="desktop type-background">
-        <h1>Content</h1>
+    <div class="desktop type-background" id="appcontainer">
+        
     </div>
   </body>
 </html>

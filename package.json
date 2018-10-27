@@ -5,7 +5,7 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc src/app.ts && electron src/app.js",
+    "start": "tsc && electron src/app.js",
     "watch-css": "node-sass --watch src/css -o src/css"
   },
   "repository": {

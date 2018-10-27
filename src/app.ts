@@ -1,8 +1,7 @@
 import {app, BrowserWindow} from 'electron';
-let win: BrowserWindow = null;
 
 app.on('ready', () => {
-    win = new BrowserWindow()
+    let win: BrowserWindow = new BrowserWindow()
     win.setFullScreen(true)
     win.loadURL(`file://${__dirname}/html/index.html`)
 })
