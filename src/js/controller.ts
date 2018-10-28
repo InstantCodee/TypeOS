@@ -17,7 +17,11 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { ErrorScreen } from '../js/errorscreen';
+import { Desktop } from '../js/desktop';
 
+/**
+ * The controller manages the dynamic content eg.: Desktop and Chat application
+ */
 class Controller {
     searchPath = "~/.local/share/typeos/apps/";
     domelement: HTMLElement | null = null;
@@ -36,22 +40,40 @@ class Controller {
                 import(appfolder).then(async appLoader => {
                     this.domelement = document.createElement("div"); // ... create the widget with the current id.
                     this.domelement.appendChild(await appLoader["default"](appfolder)); // Append the script's result in the current widget's container.
-                    console.log (document.getElementById("appcontainer"));
+                    this.overrideApp(this.domelement);
                     resolve (this.domelement); // Return new div element
                 }).catch(error => {
                     console.error("Cannot launch app! " + appId);
                     console.log(error);
+                    document.getElementById("appcontainer")!.appendChild (new ErrorScreen (error).get_element ());
                     resolve (new ErrorScreen (error).get_element ());
                 });
             }
             console.log("App not installed: " + appId);
             resolve (new ErrorScreen ("App not installed: " + appId).get_element ());
         })
-}
+    }
+
+    openDesktop () {
+        let desktop: Desktop = new Desktop ();
+        this.overrideApp(desktop.getElement());
+    }
+
+    /**
+     * Override the content in 'appcontainer' with new app.
+     */
+    private overrideApp(html: HTMLElement) {
+        document.getElementById("appcontainer")!.innerHTML = "";
+        document.getElementById("appcontainer")!.appendChild (html);
+    }
 }
 
 var controller = new Controller ();
 async function get_exception () {
     document.getElementById("appcontainer")!.innerHTML = "";
     document.getElementById("appcontainer")!.appendChild (await controller.openApp ("com.typeos.store"));
+}
+
+function desktop () {
+    controller.openDesktop ();
 }

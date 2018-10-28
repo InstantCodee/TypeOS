@@ -4,9 +4,12 @@
   "description": "Design showcase for a minimalist desktop UI",
   "main": "app.ts",
   "scripts": {
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && electron src/app.js",
-    "watch-css": "node-sass --watch src/css -o src/css"
+    "start": "echo 'Build...' && tsc && echo 'Start...' && electron src/app.js",
+    "watch-css": "node-sass --watch src/css -o src/css",
+    "build-css": "node-sass src/css -o src/css",
+    "clean": "rm src/js/*.js && rm src/css/*.css && src/*.js"
   },
   "repository": {
     "type": "git",
@@ -26,8 +29,13 @@
   },
   "homepage": "https://github.com/InstantCodee/TypeOS#readme",
   "devDependencies": {
-    "electron": "^4.0.0-beta.5",
+    "electron-rebuild": "^1.8.2",
     "node-sass": "^4.9.4",
     "typescript": "^3.1.3"
+  },
+  "dependencies": {
+    "@types/better-sqlite3": "^3.1.3",
+    "better-sqlite3": "^5.0.1",
+    "electron": "^3.0.6"
   }
 }

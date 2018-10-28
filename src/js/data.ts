@@ -13,21 +13,17 @@
     You should have received a copy of the GNU General Public License
     along with TypeOS.  If not, see <http://www.gnu.org/licenses/>.
 */
+import * as sqlite from 'better-sqlite3';
 import * as fs from 'fs';
 import * as path from 'path';
 
-export class Desktop {
-    private element: HTMLElement;
+export class Data {
+    db: any;
 
     constructor () {
-        this.element = <HTMLElement> document.createElement ("div");
-        this.element.className = "desktop";
+        this.db = new sqlite.default('data.db');
 
-        let template = fs.readFileSync (path.join (__dirname, "../html/desktop.html"), "utf8");
-        this.element.innerHTML = template;
-    }
-
-    getElement () {
-        return this.element;
+        // Migrate 
+        const createUserTable = this.db.exec (fs.readFileSync (path.join(__dirname, '../sql/migrate.sql'), 'utf8'));
     }
 }
