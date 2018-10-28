@@ -26,6 +26,7 @@ $light-active:   #404040
     transition: 0.2s
     cursor: pointer
     position: relative
+    text-decoration: none
     &.active:after
         width: 90%
     &:hover:after
@@ -47,8 +48,16 @@ $light-active:   #404040
         background: $dark-bg
     & .type-inactive
         color: $dark-inactive
+    & .type-svg-stroke-inactive
+        stroke: $dark-inactive
+    & .type-svg-fill-inactive
+        fill: $dark-inactive
     & .type-active
         color: $dark-active
+    & .type-svg-stroke-active
+        stroke: $dark-active
+    & .type-svg-fill-active
+        fill: $dark-active
     & .type-highlightable
         color: $dark-inactive
         &.active, &:hover
@@ -61,8 +70,16 @@ $light-active:   #404040
         background: $light-bg
     & .type-inactive
         color: $light-inactive
+    & .type-svg-stroke-inactive
+        stroke: $light-inactive
+    & .type-svg-fill-inactive
+        fill: $light-inactive
     & .type-active
         color: $light-active
+    & .type-svg-stroke-active
+        stroke: $light-active
+    & .type-svg-fill-active
+        fill: $light-active
     & .type-highlightable
         color: $light-inactive
         &.active, &:hover
