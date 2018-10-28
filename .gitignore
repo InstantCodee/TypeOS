@@ -64,3 +64,5 @@ typings/
 
 # JavaScript files, because we are using TypeScript
 *.js
+
+data.db
