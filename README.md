@@ -1,6 +1,5 @@
 # TypeOS
 [![Build Status](https://travis-ci.com/InstantCodee/TypeOS.svg?branch=master)](https://travis-ci.com/InstantCodee/TypeOS)
-[![Build Status](https://travis-ci.com/InstantCodee/TypeOS.svg?branch=master)](https://travis-ci.com/InstantCodee/TypeOS)
 
 TypeOS is a design showcase for a minimalist desktop UI without many icons, just text.
 
