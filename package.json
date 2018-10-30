@@ -5,7 +5,7 @@
   "main": "app.ts",
   "scripts": {
     "rebuild": "electron-rebuild -f -w better-sqlite3",
-    "test": "npm install --save-dev && npm run clean && npm run build-css && tsc && electron src/app.js --test",
+    "test": "npm install && npm install --save-dev && $(npm bin)/electron-rebuild && npm run clean && npm run build-css && tsc && electron src/app.js --test",
     "start": "echo 'Build...' && tsc && echo 'Start...' && electron src/app.js",
     "watch-css": "node-sass --watch src/css -o src/css",
     "build-css": "node-sass src/css -o src/css",
