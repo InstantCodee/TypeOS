@@ -65,5 +65,6 @@ typings/
 # JavaScript files, because we are using TypeScript
 *.js
 
-# Database file for saving users and so on.
+# Database files for saving users and so on.
 data.db
+test.db

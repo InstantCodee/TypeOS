@@ -13,12 +13,13 @@
     You should have received a copy of the GNU General Public License
     along with TypeOS.  If not, see <http://www.gnu.org/licenses/>.
 */
-import * as sqlite from 'better-sqlite3';
+import * as sqlite3 from 'better-sqlite3';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 import { CONFIG } from '../../config';
+import chalk from 'chalk';
 
 export interface IUserInfo {
     firstName: string,
@@ -33,50 +34,51 @@ export interface IUserSettings {
 }
 
 export class Data {
-    db = new sqlite.default('data.db');
+    db: any;
 
     /**
      * Executes migration on start.
      */
-    constructor () {
+    constructor(test: boolean) {
+        if (test) {
+            // Delete test database If exist.
+            if(fs.existsSync(path.join(__dirname, '../../test.db'))) {
+                fs.unlinkSync(path.join(__dirname, '../../test.db'));
+            }
+            this.db = new sqlite3.default('test.db');
+        } else {
+            this.db = new sqlite3.default('data.db');
+        }
         // Migrate and create tables If not exist.
-        this.db.exec (fs.readFileSync (path.join(__dirname, '../sql/migrate.sql'), 'utf8'));
+        this.db.exec(fs.readFileSync(path.join(__dirname, '../sql/migrate.sql'), 'utf8'));
     }
 
     /**
      * Add a new user to the database.
      * @param userInfo JSON object defines basic account information about user like password or username.
-     * @param userSettings JSON object defines default settings about user. Leave blank for default.
+     * @param userSettings JSON object defines default settings about user.
      */
-    async addUser (userInfo: IUserInfo, userSettings: IUserSettings) {
+    async addUser(userInfo: IUserInfo, userSettings: IUserSettings) {
         // First check, If user already exist.
         const uSelect = this.db.prepare("SELECT id FROM `users` WHERE username=?").get(userInfo.username);
-        if(uSelect != undefined) throw new Error("User " + userInfo.username + " already exist!");
+        if (uSelect != undefined) throw new Error("User " + userInfo.username + " already exist!");
 
-        // Create user settings
+        // Init  user settings
         const sInsert = this.db.prepare("INSERT INTO `settings` (lightMode, lang, temperatureType) VALUES (@lightMode, @lang, @temperatureType)");
         let sResult: any;   // Must do it 'any' because there is an error at the TypeScript definition by DefinitelyTyped.
                             // lastInsertROWID should be lastInsertRowid.
 
-        if(userSettings != undefined) {
-            sResult = sInsert.run({
-                lightMode: this.boolToInt(userSettings.lightMode),
-                lang: userSettings.lang,
-                temperatureType: userSettings.temperatureType
-            });
-        } else {
-            // Set default values If user didn't pass some.
-            sResult = sInsert.run({
-                lightMode: 0,
-                lang: 'en',
-                temperatureType: 0
-            });
-        }
+        // Set user settings
+        sResult = sInsert.run({
+            lightMode: this.boolToInt(userSettings.lightMode),
+            lang: userSettings.lang,
+            temperatureType: userSettings.temperatureType
+        });
 
         // Create User
         const uInsert = this.db.prepare("INSERT INTO `users` (firstName, lastName, username, password, settings) VALUES" +
             "(@first, @last, @username, @password, @settings)");
-        uInsert.run ({
+        uInsert.run({
             first: userInfo.firstName,
             last: userInfo.lastName,
             username: userInfo.username,
@@ -84,21 +86,21 @@ export class Data {
             settings: Number(sResult.lastInsertRowid)
         });
     }
-    
+
     /**
      * Login as user
      * @param username Username of user
      * @param password Password of user
      * @return JWT Token
      */
-    login (username: string, password: string): Promise<string> {
-        return new Promise<string> (async (resolve, reject) => {
+    login(username: string, password: string): Promise<string> {
+        return new Promise<string>(async (resolve, reject) => {
             // Grab user from database and select everything else.
             const sUser = this.db.prepare("SELECT * FROM `users` WHERE username=?").get(username);
 
             // Compare given password with hashed one from database.
             if (await this.comparePasswords(password, sUser.password)) {
-                resolve (jwt.sign({
+                resolve(jwt.sign({
                     id: sUser.id,
                     firstName: sUser.firstName,
                     lastName: sUser.lastName,
@@ -113,9 +115,9 @@ export class Data {
      * @param password Plain password
      * @returns Hashed password
      */
-    private cryptPassword (password: string): Promise<string> {
-        return new Promise<string> (async (resolve, reject) => {
-            resolve (await bcrypt.hash(password, CONFIG.saltRounds));
+    private cryptPassword(password: string): Promise<string> {
+        return new Promise<string>(async (resolve, reject) => {
+            resolve(await bcrypt.hash(password, CONFIG.saltRounds));
         })
     }
 
@@ -125,8 +127,8 @@ export class Data {
      * @param hashedPassword Hashed password (from database).
      * @returns true If given password matches with that from the user.
      */
-    private comparePasswords (password: string, hashedPassword: string): Promise<boolean> {
-        return new Promise<boolean> (async (resolve, reject) => {            
+    private comparePasswords(password: string, hashedPassword: string): Promise<boolean> {
+        return new Promise<boolean>(async (resolve, reject) => {
             // Return If result from database is empty.
             if (hashedPassword == null) resolve(false);
 
@@ -138,8 +140,9 @@ export class Data {
     /**
      * Converts the input boolean into a number to store it into the database.
      * @param bool Your boolean you want to convert.
+     * @returns The corresponding integer.
      */
-    private boolToInt (bool: boolean): number {
+    private boolToInt(bool: boolean): number {
         return bool ? 1 : 0;    // Return 1 If 'bool' is true and 0 If not.
     }
 }

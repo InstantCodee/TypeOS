@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - "node"
+
+notifications:
+  on_success: always
+  email: false
+
+git:
+  depth: false
+
+# Install all dependencies
+install:
+  - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+  - sudo apt-get install -y nodejs
+
+# Run all tests
+jobs:
+  include:
+    - stage: tests
+      name: "Unit Tests"
+      script: npm test
