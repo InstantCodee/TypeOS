@@ -1,9 +1,11 @@
 language: node_js
+distro: yakkety
+sudo: required
 node_js:
   - "node"
 cache: 
   directories: 
-    - /home/travis/.node_modules
+    - "/home/travis/build/InstantCodee/TypeOS/node_modules"
 
 notifications:
   on_success: always
@@ -16,6 +18,7 @@ git:
 install:
   - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
   - sudo apt-get install -y nodejs
+  - sudo apt install libdbus-1-dev
 
 # Run all tests
 jobs:
