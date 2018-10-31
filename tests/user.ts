@@ -47,6 +47,9 @@ export class UserTests {
 
         // Padding is used when writing in the same line to override text comes after the new text.
         this.padding = "                           ";
+
+        // Starting test loop
+        this.loop ();
     }
 
     async loop () {
@@ -110,3 +113,4 @@ export class UserTests {
         })
     }
 }
+new UserTests ();

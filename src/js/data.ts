@@ -41,11 +41,7 @@ export class Data {
      */
     constructor(test: boolean) {
         if (test) {
-            // Delete test database If exist.
-            if(fs.existsSync(path.join(__dirname, '../../test.db'))) {
-                fs.unlinkSync(path.join(__dirname, '../../test.db'));
-            }
-            this.db = new sqlite3.default('test.db');
+            this.db = new sqlite3.default('test.db', { memory: true });
         } else {
             this.db = new sqlite3.default('data.db');
         }
