@@ -2,26 +2,23 @@ language: node_js
 dist: trusty
 sudo: required
 node_js:
-  - "node"
-cache: 
-  directories: 
-    - "/home/travis/build/InstantCodee/TypeOS/node_modules"
-
+- node
+cache:
+  directories:
+  - "/home/travis/build/InstantCodee/TypeOS/node_modules"
 notifications:
   on_success: always
   email: false
-
+  slack:
+    rooms:
+      secure: UofD2iFJkxveCGbv/wzMKxzFE9YBoBiLfYoeQNxf30u7D/xRHqzMJZ+KFr1bMLWjyTljdVLPHb5hKpkQ4hlakLT0o4ikoGvyjx62ZMYm4VqqhCrWT0HI/QejoYQBUfsOK+RU0Ggr+rxljLKcanarBVjNHCvVCLZ+Ah7szIgWDYMI5Rg2INBkkkLWrQnAFrXEcHw9+FGrZH49iOPeCRNNYWTSYJUxbPcWACGIq5Jh4yG6TrnZWI+QycVXYWp7K4rULNZVRNAWdrPwm8HN0ynLstyIXj96DuNIlVU/LK1b9SUtdIamGd6TwYNJw4jERlHr+6KDCjepYEpT2LTxBFvVr4C/1+utcZCMqS9P41Zv+bJIghI2noMYsjiIKkgVk1aheKjh3ilcXxT+KJBsrT41+QORobcXqiGQOS2mVzG31kt4yJ9ELwkijFc+SOVGi1l/wemaTRzfZovZK/IS7PT7qwU7a7BYOO5OrowZrXY75lnwD584eKQRHWI3PJNO3ub+dR+VRWfS7lpcgIbHCT3HZMVi3nntIu3DiHiNPfOnpP4imoDrmiqFdm6ka/JzmowJh9vhCh0mR/04wt4Iz2nYRqdBtCOO6gjLyx8RNOOh46WqnOqbzMfoMqMdYSnodB/7gUcisMVfrxM/5FT/GwovlJ5zV4ImYdAPhbHE+meuwVM=
 git:
   depth: false
-
-# Install all dependencies
 install:
-  - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-  - sudo apt-get install -y nodejs
-
-# Run all tests
+- curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+- sudo apt-get install -y nodejs
 jobs:
   include:
-    - stage: tests
-      name: "Unit Tests"
-      script: npm test
+  - stage: tests
+    name: Unit Tests
+    script: npm test

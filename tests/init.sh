@@ -1,6 +1,6 @@
-###########################################################
-# Should be executed in project root, not in test folder. #
-###########################################################
+###############################################################
+# Should be executed from project root, not from test folder. #
+###############################################################
 
 # Setting some colores, because everyone likes colors.
 BLUE='\033[0;34m'
