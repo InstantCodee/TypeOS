@@ -32,6 +32,11 @@ node tests/user.js
 echo "\n${BLUE}Done, hopefully everything worked. Revert changes ..."
 
 # After tests are finished, revert, so you can execute TypeOS with Electron.
-npm rm bcrypt
-npm install bcrypt
-$(npm bin)/electron-rebuild
+# Only If user is not "travis" compile, because it doesn't matter for travis. It's only used for testing.
+if [ "$USER" = "travis" ]; then
+    echo "Well, this is running by Travis. Here, it doesn't matter If he can execute the GUI."
+else
+    npm rm bcrypt
+    npm install bcrypt
+    $(npm bin)/electron-rebuild
+fi
