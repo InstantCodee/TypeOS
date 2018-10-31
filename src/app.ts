@@ -22,19 +22,11 @@ import chalk from 'chalk';
 
 export let database: Data = new Data(false);
 
-// Running test suit If wanted.
-if(process.argv.indexOf("--test") > 0) {
-    console.log (chalk.blue("Entering test suite ...\n"));
-    console.log (chalk.bold("Running user tests ..."))
-    console.log ("=====================================")
-    new UserTests ().loop();
-} else {
-    app.on('ready', async () => {
-        let win: BrowserWindow = new BrowserWindow()
-        win.setFullScreen(true)
-        win.loadURL(`file://${__dirname}/html/index.html`);
-    
-        // Set what's happen when the user exit the application
-        process.on('exit', () => database.db.close());
-    })
-}
+app.on('ready', async () => {
+    let win: BrowserWindow = new BrowserWindow()
+    win.setFullScreen(true)
+    win.loadURL(`file://${__dirname}/html/index.html`);
+
+    // Set what's happen when the user exit the application
+    process.on('exit', () => database.db.close());
+})
