@@ -18,6 +18,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { ErrorScreen } from '../js/errorscreen';
 import { Desktop } from '../js/desktop';
+import { database } from '../app';
+import { Setup } from './setup';
 
 /**
  * The controller manages the dynamic content eg.: Desktop and Chat application
@@ -59,10 +61,16 @@ class Controller {
         this.overrideApp(desktop.getElement());
     }
 
+    openSetup () {
+        if (database.isEmpty()) {
+            this.overrideApp(new Setup().domelement);
+        }
+    }
+
     /**
      * Override the content in 'appcontainer' with new app.
      */
-    private overrideApp(html: HTMLElement) {
+    overrideApp(html: HTMLElement) {
         document.getElementById("appcontainer")!.innerHTML = "";
         document.getElementById("appcontainer")!.appendChild (html);
     }
@@ -70,10 +78,12 @@ class Controller {
 
 var controller = new Controller ();
 async function get_exception () {
-    document.getElementById("appcontainer")!.innerHTML = "";
-    document.getElementById("appcontainer")!.appendChild (await controller.openApp ("com.typeos.store"));
+    controller.overrideApp (await controller.openApp ("com.typeos.store"));
 }
 
 function desktop () {
     controller.openDesktop ();
+}
+function openSetup () {
+    controller.openSetup();
 }

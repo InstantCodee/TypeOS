@@ -107,6 +107,17 @@ export class Data {
     }
 
     /**
+     * Checks If the database is empty.
+     * @returns true If the database is empty and false If not.
+     */
+    isEmpty(): Promise<boolean> {
+        return new Promise<boolean> ((resolve, reject) => {
+            const select = this.db.prepare("SELECT * FROM users, settings").all();
+            resolve (select.length == 0 ? true : false);    // Return false If length is > 0 and true if == 0.
+        })
+    }
+
+    /**
      * Hashes text with bcrypt asynchronously. Takes salt rounds from config.
      * @param password Plain password
      * @returns Hashed password
