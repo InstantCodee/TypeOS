@@ -18,14 +18,15 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { ErrorScreen } from '../js/errorscreen';
 import { Desktop } from '../js/desktop';
-import { database } from '../app';
-import { Setup } from './setup';
+import { Setup } from '../js/setup';
+import { Data } from '../js/data';
 
 /**
  * The controller manages the dynamic content eg.: Desktop and Chat application
  */
 class Controller {
     searchPath = "~/.local/share/typeos/apps/";
+    db = new Data(false);
     domelement: HTMLElement | null = null;
 
     constructor () {
@@ -53,17 +54,17 @@ class Controller {
             }
             console.log("App not installed: " + appId);
             resolve (new ErrorScreen ("App not installed: " + appId).get_element ());
-        })
+        });
     }
 
     openDesktop () {
-        let desktop: Desktop = new Desktop ();
-        this.overrideApp(desktop.getElement());
+        this.overrideApp(new Desktop().getElement());
     }
 
     openSetup () {
-        if (database.isEmpty()) {
-            this.overrideApp(new Setup().domelement);
+        console.log ("Display setup...")
+        if (this.db.isEmpty()) {
+            this.overrideApp(new Setup().getElement());
         }
     }
 

@@ -34,7 +34,12 @@ export class ErrorScreen {
         "Error is: undefined. We can't even display an error ಥʖ̯ಥ",
         "It was Chuck Norris, I swear!",
         "At least your screen is not blue!",
-        "Hey! It's not a bug, it's a feature!"
+        "Hey! It's not a bug, it's a feature!",
+        "Report it at Por... sorry GitHub!",
+        "Look! There is a flying elephant!",
+        "The following lines are not for people under 1337 years.",
+        "Following lines may contain swearwords for programmers.",
+        "Be aware of sharing the following error. It can leads to crying programmers."
     ]
     rnd: number = Number((Math.random() * ((this.errorMessages.length-1) - 0) + 0).toFixed(0));
 

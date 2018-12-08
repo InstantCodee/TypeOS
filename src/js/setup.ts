@@ -17,7 +17,11 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export class Setup {
-    domelement: HTMLElement;
+    private domelement: HTMLElement;
+
+    getElement(): HTMLElement {
+        return this.domelement;
+    }
 
     constructor() {
         this.domelement = document.createElement ("div");

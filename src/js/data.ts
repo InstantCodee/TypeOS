@@ -19,7 +19,6 @@ import * as path from 'path';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 import { CONFIG } from '../../config';
-import chalk from 'chalk';
 
 export interface IUserInfo {
     firstName: string,
