@@ -16,6 +16,32 @@
 
 export class ErrorScreen {
     private element: HTMLElement;
+    errorMessages: Array<string> = [
+        "ooops, you shouldn't be seeing this screen :p",
+        "Something went terribly wrong.",
+        "Error ¯\\_(ツ)_/¯",
+        "It's not our fault, your computer is to blame.",
+        "What have you done? ಠ╭╮ಠ",
+        "That was planned, I think...",
+        "What the fu**?!",
+        "Ehmm, yeah... Something went wrong?",
+        "Everything is fine",
+        "Maybe it's our fault or yours.",
+        "Sh*t, that was not intended.",
+        "Ehmm, what? Something went wrong? I have to go ─=≡Σᕕ( ͡° ͜ʖ ͡°)ᕗ",
+        "Web developers would say: 500 Internal Error",
+        "The problem is usually 50cm in front of the screen.",
+        "Error is: undefined. We can't even display an error ಥʖ̯ಥ",
+        "It was Chuck Norris, I swear!",
+        "At least your screen is not blue!",
+        "Hey! It's not a bug, it's a feature!",
+        "Report it at Por... sorry GitHub!",
+        "Look! There is a flying elephant!",
+        "The following lines are not for people under 1337 years.",
+        "Following lines may contain swearwords for programmers.",
+        "Be aware of sharing the following error. It can leads to crying programmers."
+    ]
+    rnd: number = Number((Math.random() * ((this.errorMessages.length-1) - 0) + 0).toFixed(0));
 
     constructor (message: string) {
         this.element = <HTMLElement> document.createElement ("div");
@@ -27,7 +53,7 @@ export class ErrorScreen {
         this.element.style.textAlign = "center";
 
         var title = document.createElement ("h1");
-        title.innerHTML = "ooops, you shouldn't be seeing this screen :p";
+        title.innerHTML = this.errorMessages[this.rnd]; // Random error message
         title.style.fontSize      = "32px";
         title.style.paddingBottom = "40px";
         title.style.fontWeight    = "300";
@@ -42,6 +68,7 @@ export class ErrorScreen {
     }
 
     get_element (): HTMLElement {
+        console.log ("RND: ", this.rnd, "Len.:", this.errorMessages.length)
         return this.element;
     }
 }

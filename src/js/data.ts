@@ -19,7 +19,6 @@ import * as path from 'path';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 import { CONFIG } from '../../config';
-import chalk from 'chalk';
 
 export interface IUserInfo {
     firstName: string,
@@ -104,6 +103,17 @@ export class Data {
                 }, CONFIG.JWTKey));
             } else throw Error("Login credentials are wrong!");
         });
+    }
+
+    /**
+     * Checks If the database is empty.
+     * @returns true If the database is empty and false If not.
+     */
+    isEmpty(): Promise<boolean> {
+        return new Promise<boolean> ((resolve, reject) => {
+            const select = this.db.prepare("SELECT * FROM users, settings").all();
+            resolve (select.length == 0 ? true : false);    // Return false If length is > 0 and true if == 0.
+        })
     }
 
     /**

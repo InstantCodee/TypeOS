@@ -13,14 +13,18 @@
     You should have received a copy of the GNU General Public License
     along with TypeOS.  If not, see <http://www.gnu.org/licenses/>.
 */
-import {app, BrowserWindow} from 'electron';
+import * as fs from 'fs';
+import * as path from 'path';
 
-app.on('ready', async () => {
-    let win: BrowserWindow = new BrowserWindow({width: 1300, height: 800});
-    win.setFullScreen(false);
-    win.loadURL(`file://${__dirname}/html/index.html`);
+export class Setup {
+    private domelement: HTMLElement;
 
-    // Set what's happen when the user exit the application
-    process.on('exit', () => undefined);
+    getElement(): HTMLElement {
+        return this.domelement;
+    }
 
-})
+    constructor() {
+        this.domelement = document.createElement ("div");
+        this.domelement.innerHTML = fs.readFileSync (path.join(__dirname, "../html/setup.html"), "utf8");
+    }
+}

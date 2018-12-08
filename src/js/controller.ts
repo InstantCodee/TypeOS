@@ -18,12 +18,15 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { ErrorScreen } from '../js/errorscreen';
 import { Desktop } from '../js/desktop';
+import { Setup } from '../js/setup';
+import { Data } from '../js/data';
 
 /**
  * The controller manages the dynamic content eg.: Desktop and Chat application
  */
 class Controller {
     searchPath = "~/.local/share/typeos/apps/";
+    db = new Data(false);
     domelement: HTMLElement | null = null;
 
     constructor () {
@@ -51,18 +54,24 @@ class Controller {
             }
             console.log("App not installed: " + appId);
             resolve (new ErrorScreen ("App not installed: " + appId).get_element ());
-        })
+        });
     }
 
     openDesktop () {
-        let desktop: Desktop = new Desktop ();
-        this.overrideApp(desktop.getElement());
+        this.overrideApp(new Desktop().getElement());
+    }
+
+    openSetup () {
+        console.log ("Display setup...")
+        if (this.db.isEmpty()) {
+            this.overrideApp(new Setup().getElement());
+        }
     }
 
     /**
      * Override the content in 'appcontainer' with new app.
      */
-    private overrideApp(html: HTMLElement) {
+    overrideApp(html: HTMLElement) {
         document.getElementById("appcontainer")!.innerHTML = "";
         document.getElementById("appcontainer")!.appendChild (html);
     }
@@ -70,10 +79,12 @@ class Controller {
 
 var controller = new Controller ();
 async function get_exception () {
-    document.getElementById("appcontainer")!.innerHTML = "";
-    document.getElementById("appcontainer")!.appendChild (await controller.openApp ("com.typeos.store"));
+    controller.overrideApp (await controller.openApp ("com.typeos.store"));
 }
 
 function desktop () {
     controller.openDesktop ();
+}
+function openSetup () {
+    controller.openSetup();
 }
